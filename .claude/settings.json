@@ -1,0 +1,53 @@
+{
+  "hooks": {
+    "sessionStart": {
+      "command": ".claude/hooks/session-start.py",
+      "enabled": true,
+      "description": "Initialize development environment and display project context"
+    },
+    "userPromptSubmit": {
+      "command": ".claude/hooks/user-prompt-submit.py",
+      "enabled": true,
+      "description": "Enhance prompts with project context and coding standards"
+    },
+    "preToolUse": {
+      "command": ".claude/hooks/pre-tool-use.py",
+      "enabled": true,
+      "description": "Security validation and dangerous operation blocking",
+      "matchers": {
+        "toolName": ["Bash", "Write", "Edit"]
+      }
+    },
+    "postToolUse": {
+      "command": ".claude/hooks/post-tool-use.py",
+      "enabled": true,
+      "description": "Auto-format, lint, and test modified files",
+      "matchers": {
+        "toolName": ["Write", "Edit"]
+      }
+    },
+    "stop": {
+      "command": ".claude/hooks/stop.py",
+      "enabled": true,
+      "description": "Final validation and completion notification"
+    },
+    "notification": {
+      "command": ".claude/hooks/notification.py",
+      "enabled": false,
+      "description": "Desktop notifications for events (optional)"
+    }
+  },
+  "permissions": {
+    "bash": "ask",
+    "write": "ask",
+    "edit": "auto",
+    "read": "auto",
+    "glob": "auto",
+    "grep": "auto"
+  },
+  "experimental": {
+    "checkpoints": true,
+    "subagents": true,
+    "backgroundTasks": true
+  }
+}

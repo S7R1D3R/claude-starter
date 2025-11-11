@@ -1,0 +1,59 @@
+{
+  "description": "Local settings example - copy to settings.local.json and customize",
+  "hooks": {
+    "sessionStart": {
+      "enabled": true
+    },
+    "userPromptSubmit": {
+      "enabled": true
+    },
+    "preToolUse": {
+      "enabled": true
+    },
+    "postToolUse": {
+      "enabled": true
+    },
+    "stop": {
+      "enabled": true
+    },
+    "notification": {
+      "enabled": false,
+      "description": "Enable for desktop notifications (requires notification system)"
+    }
+  },
+  "permissions": {
+    "bash": "ask",
+    "write": "ask",
+    "edit": "auto",
+    "read": "auto"
+  },
+  "customSettings": {
+    "autoFormat": true,
+    "autoLint": true,
+    "autoTest": false,
+    "strictMode": false,
+    "verboseLogging": false
+  },
+  "languageSpecific": {
+    "javascript": {
+      "formatter": "prettier",
+      "linter": "eslint",
+      "testRunner": "jest"
+    },
+    "python": {
+      "formatter": "black",
+      "linter": "pylint",
+      "testRunner": "pytest"
+    },
+    "rust": {
+      "formatter": "rustfmt",
+      "linter": "clippy",
+      "testRunner": "cargo test"
+    },
+    "go": {
+      "formatter": "gofmt",
+      "linter": "golint",
+      "testRunner": "go test"
+    }
+  }
+}
