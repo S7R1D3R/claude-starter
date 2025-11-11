@@ -11,6 +11,7 @@ Provide a production-ready Claude Code setup with:
 - Security validation
 - Intelligent prompt enhancement
 - Comprehensive slash commands
+- **Modular Skills system** (New 2025 feature!)
 - GitHub Actions integration
 - MCP server configurations
 
@@ -174,6 +175,131 @@ project-root/
 - `/ai:refactor` - Intelligent refactoring with best practices
 - `/ai:explain` - Explain complex code sections in detail
 
+## Skills (New in 2025!)
+
+**Skills** are modular, reusable capabilities that extend Claude Code with specialized expertise and workflows. Released in October 2025, Skills represent a powerful new way to enhance Claude's abilities with domain-specific knowledge and automation.
+
+### What Are Skills?
+
+Skills are organized folders containing:
+- **Instructions**: Prompts and guidelines for specific tasks
+- **Scripts**: Executable code for automation
+- **Resources**: Reference files, templates, and documentation
+- **Configuration**: Metadata and invocation rules
+
+### Key Features
+
+- **Model-Invoked**: Claude automatically decides when to use a Skill based on your request and the Skill's description
+- **Marketplace Available**: Install Skills from the `anthropics/skills` repository
+- **Custom Skills**: Create your own Skills for team-specific workflows
+- **Automatic Loading**: Skills load automatically when relevant to the task
+- **Available to**: Pro, Max, Team, and Enterprise users
+
+### How to Use Skills
+
+Skills are invoked automatically by Claude when needed. You don't need to explicitly call them - just describe what you want to do, and Claude will use the appropriate Skill if available.
+
+**Example:**
+```
+You: "Set up a session start hook for this project"
+Claude: [Automatically invokes the session-start-hook Skill]
+```
+
+### Installing Skills
+
+**From Marketplace:**
+```bash
+# Browse available Skills
+ls ~/.claude/skills/
+
+# Skills are typically installed via Claude Code plugins
+# Check the anthropics/skills repository for available Skills
+```
+
+**Manual Installation:**
+```bash
+# Create a custom Skill
+mkdir -p ~/.claude/skills/my-custom-skill
+cd ~/.claude/skills/my-custom-skill
+
+# Add Skill configuration
+cat > skill.json <<EOF
+{
+  "name": "my-custom-skill",
+  "description": "Brief description of what this Skill does",
+  "version": "1.0.0"
+}
+EOF
+
+# Add Skill instructions
+cat > instructions.md <<EOF
+# My Custom Skill Instructions
+[Your detailed instructions here]
+EOF
+```
+
+### Available Skills (Project-Specific)
+
+Check your `~/.claude/skills/` directory to see installed Skills:
+- **session-start-hook**: Create and develop startup hooks for Claude Code sessions
+- _More Skills will appear here as you install them_
+
+### Creating Custom Skills
+
+**Skill Structure:**
+```
+~/.claude/skills/
+└── your-skill-name/
+    ├── skill.json          # Metadata and configuration
+    ├── instructions.md     # Main Skill prompt
+    ├── scripts/           # Executable scripts
+    │   └── setup.sh
+    └── resources/         # Templates and reference files
+        └── template.txt
+```
+
+**Best Practices for Skills:**
+1. **Clear Description**: Write descriptive metadata so Claude knows when to invoke
+2. **Focused Purpose**: Each Skill should do one thing well
+3. **Self-Contained**: Include all necessary resources within the Skill
+4. **Tested**: Verify Skills work across different scenarios
+5. **Documented**: Provide clear instructions and examples
+
+### Skills vs. Slash Commands
+
+| Feature | Skills | Slash Commands |
+|---------|--------|----------------|
+| **Invocation** | Automatic by Claude | Manual by user |
+| **Scope** | Broad, complex workflows | Specific, defined tasks |
+| **Flexibility** | Highly adaptable | Fixed behavior |
+| **Use Case** | Domain expertise | Quick utilities |
+
+### When to Use Skills
+
+Use Skills for:
+- Complex, multi-step workflows
+- Domain-specific expertise (e.g., security, DevOps)
+- Team-wide best practices and patterns
+- Repetitive tasks that need intelligent adaptation
+- Specialized tooling and integrations
+
+### Skill Development Tips
+
+1. **Start Simple**: Begin with basic instructions, expand as needed
+2. **Include Examples**: Show expected inputs and outputs
+3. **Error Handling**: Provide guidance for edge cases
+4. **Version Control**: Track Skill changes like code
+5. **Share with Team**: Publish useful Skills to your team repository
+
+### Resources
+
+- **Skills Marketplace**: `anthropics/skills` on GitHub
+- **Documentation**: Check `~/.claude/skills/README.md`
+- **Community Skills**: Explore shared Skills from other developers
+- **Skill Templates**: Use starter templates for common patterns
+
+---
+
 ## Hooks & Automation
 
 This project includes intelligent hooks that run automatically:
@@ -232,9 +358,10 @@ _This section will be auto-populated based on your specific project. Add custom 
 - Documentation: See `docs/` directory
 - Hooks Guide: `docs/HOOKS.md`
 - Commands Reference: `docs/COMMANDS.md`
+- Skills Guide: `docs/SKILLS.md`
 - MCP Setup: `docs/MCP_SERVERS.md`
 - Setup Guide: `docs/SETUP.md`
 
 ---
 
-**Remember**: This boilerplate enforces quality and security automatically. Trust the hooks and use the slash commands for maximum productivity!
+**Remember**: This boilerplate enforces quality and security automatically. Trust the hooks, use the slash commands, and leverage Skills for maximum productivity with the latest 2025 Claude Code features!
