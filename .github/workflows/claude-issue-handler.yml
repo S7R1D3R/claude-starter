@@ -1,0 +1,103 @@
+name: Claude Code Issue Handler
+
+on:
+  issues:
+    types: [opened, labeled]
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  handle-issue:
+    name: AI Issue Handler
+    runs-on: ubuntu-latest
+
+    # Run when issue is labeled with "claude" or comment mentions @claude
+    if: |
+      (github.event_name == 'issues' && contains(github.event.issue.labels.*.name, 'claude')) ||
+      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@claude'))
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Parse issue
+        id: parse
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const isFeature = issue.labels.some(l => l.name === 'enhancement' || l.name === 'feature');
+            const isBug = issue.labels.some(l => l.name === 'bug');
+
+            return {
+              number: issue.number,
+              title: issue.title,
+              body: issue.body,
+              type: isFeature ? 'feature' : isBug ? 'bug' : 'task'
+            };
+
+      - name: Generate implementation plan
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic-api-key: ${{ secrets.ANTHROPIC_API_KEY }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          prompt: |
+            Analyze this GitHub issue and create a detailed implementation plan.
+
+            Issue: #${{ steps.parse.outputs.number }}
+            Title: ${{ steps.parse.outputs.title }}
+            Type: ${{ steps.parse.outputs.type }}
+
+            Description:
+            ${{ steps.parse.outputs.body }}
+
+            Provide:
+            1. **Analysis** - Understand requirements and scope
+            2. **Technical Approach** - How to implement
+            3. **Files to Modify** - List specific files
+            4. **Implementation Steps** - Step-by-step plan
+            5. **Testing Strategy** - How to test the changes
+            6. **Potential Risks** - What could go wrong
+            7. **Estimated Effort** - Complexity assessment
+
+            Format as a clear, actionable plan.
+
+      - name: Post plan comment
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const plan = process.env.CLAUDE_PLAN || 'Implementation plan generated';
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.issue.number,
+              body: `## 📋 Implementation Plan\n\n${plan}\n\n---\n\n**Next Steps:**\n- Review this plan\n- Reply with "approve" to create a branch and start implementation\n- Or request changes\n\n*Powered by Claude Code*`
+            });
+
+      - name: Create feature branch
+        if: contains(github.event.comment.body, 'approve') && contains(github.event.comment.body, '@claude')
+        run: |
+          BRANCH_NAME="feature/issue-${{ steps.parse.outputs.number }}-$(echo '${{ steps.parse.outputs.title }}' | tr '[:upper:]' '[:lower:]' | tr ' ' '-' | cut -c1-30)"
+          git checkout -b "$BRANCH_NAME"
+          git push -u origin "$BRANCH_NAME"
+          echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
+
+      - name: Notify branch created
+        if: env.BRANCH_NAME
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.issue.number,
+              body: `✅ Created branch \`${process.env.BRANCH_NAME}\`\n\nYou can now start implementing the changes.`
+            });
