@@ -334,6 +334,66 @@ This project includes intelligent hooks that run automatically:
 - Ensures documentation is updated
 - Sends completion notifications
 
+## RAG Integration (Advanced)
+
+This project supports **Retrieval-Augmented Generation (RAG)** through Archon integration.
+
+### What is RAG?
+
+RAG enhances AI responses by:
+- **Retrieving** relevant context from a vector database
+- **Augmenting** prompts with that context automatically
+- **Generating** more accurate, project-specific answers
+
+### Setup
+
+1. **Install Archon** (RAG knowledge base)
+   ```bash
+   git clone -b stable https://github.com/coleam00/Archon.git
+   cd Archon && docker-compose up -d
+   ```
+
+2. **Configure MCP** in `~/.claude.json`
+   ```json
+   {
+     "mcpServers": {
+       "archon": {
+         "type": "http",
+         "url": "http://localhost:8051"
+       }
+     }
+   }
+   ```
+
+3. **Populate Knowledge Base**
+   - Open http://localhost:3737
+   - Add project documentation
+   - Add API specifications
+   - Add code examples
+
+### Benefits
+
+With RAG enabled:
+- ✅ Claude automatically searches your docs
+- ✅ Context-aware code suggestions
+- ✅ Follows your specific patterns
+- ✅ Includes relevant examples from your docs
+
+### Optional: RAG-Enhanced Hooks
+
+Copy example hooks from `examples/rag-integration/hooks/`:
+- `rag-prompt-enhance.py` - Auto-inject context into prompts
+- Automatic documentation lookup
+- No manual searching needed
+
+### Slash Commands
+
+Available RAG commands (copy from `examples/rag-integration/commands/`):
+- `/knowledge:search` - Query documentation
+- `/knowledge:add` - Add new docs to knowledge base
+
+**Full RAG Guide**: See `docs/RAG_INTEGRATION.md`
+
 ## External Context
 
 Import additional configuration and documentation:

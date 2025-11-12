@@ -1,45 +1,66 @@
 # Claude Code Starter Boilerplate
 
-A ready-to-use template that supercharges your development with AI automation, code quality tools, and intelligent workflows for any programming language.
+A ready-to-use template that supercharges your development with AI automation, code quality tools, intelligent workflows, and **RAG-powered documentation access** for any programming language.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-2025-purple)](https://claude.ai/code)
+[![RAG Enabled](https://img.shields.io/badge/RAG-Archon-green)](https://github.com/coleam00/Archon)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
 ## What is This?
 
 This is a **starter template** that adds powerful AI capabilities to your coding projects. Think of it as a smart assistant that:
-- Automatically checks your code quality
-- Prevents security mistakes
-- Formats and organizes your code
-- Helps you write better commits and pull requests
-- Works with **any programming language** (JavaScript, Python, Rust, Go, Java, etc.)
+- 🔍 **Automatically searches your documentation** using RAG (Retrieval-Augmented Generation)
+- ✅ Automatically checks your code quality
+- 🛡️ Prevents security mistakes
+- ✨ Formats and organizes your code
+- 📝 Helps you write better commits and pull requests
+- 🌐 Works with **any programming language** (JavaScript, Python, Rust, Go, Java, etc.)
 
-## How to Use This
+### ⭐ NEW: RAG Integration with Archon
 
-### Step 1: Get the Template
+Claude now has **instant access to your entire knowledge base**:
+- Semantic search across all project documentation
+- Automatic context injection for better answers
+- Code examples from docs available instantly
+- Vector-based relevance matching
 
-**Option A: Start a new project**
+No more manually searching docs or copy-pasting context!
+
+## Quick Start
+
+Choose your setup path:
+
+### 🚀 Option A: Basic Setup (5 minutes)
+Get started with hooks and commands only.
+
+### 🎯 Option B: Full Setup with RAG (15 minutes) ⭐ **Recommended**
+Get everything including RAG-powered documentation access.
+
+---
+
+## 🚀 Option A: Basic Setup
+
+### 1. Get the Template
+
+**For new projects:**
 ```bash
 git clone https://github.com/yourusername/claude-starter.git my-project
 cd my-project
-./scripts/setup-wizard.sh
 ```
 
-**Option B: Add to an existing project**
+**For existing projects:**
 ```bash
-# Copy the .claude folder to your existing project
+# Copy the .claude folder to your project
 cp -r /path/to/claude-starter/.claude /path/to/your-project/
 cd /path/to/your-project
 chmod +x .claude/hooks/*.py
 ```
 
-### Step 2: Install Your Project Dependencies
-
-The template auto-detects your language and suggests the right commands:
+### 2. Install Dependencies
 
 ```bash
-# Node.js / JavaScript / TypeScript
+# Node.js
 npm install
 
 # Python
@@ -51,18 +72,181 @@ cargo build
 # Go
 go mod download
 
-# Or use the quick command:
-# Just type in Claude Code: /dev:setup
+# Or let Claude detect and run the right command:
+# claude-code → type: /dev:setup
 ```
 
-### Step 3: Start Using Claude Code
+### 3. Start Claude Code
 
-Open Claude Code in your project:
 ```bash
 claude-code
 ```
 
-That's it! The template is now active and will automatically help you code better.
+✅ You're ready! The template will automatically assist with code quality, security, and formatting.
+
+---
+
+## 🎯 Option B: Full Setup with RAG (Recommended)
+
+Get the complete experience with RAG-powered documentation access!
+
+### 1. Get the Template
+
+```bash
+# Clone the starter
+git clone https://github.com/yourusername/claude-starter.git my-project
+cd my-project
+chmod +x .claude/hooks/*.py
+```
+
+### 2. Install Archon (RAG Backend)
+
+```bash
+# Clone Archon in a separate location
+cd ~
+git clone -b stable https://github.com/coleam00/Archon.git
+cd Archon
+
+# Setup environment
+cp .env.example .env
+```
+
+**Edit `.env` with your credentials:**
+```bash
+nano .env
+```
+
+Add:
+```env
+# Get these from https://supabase.com (free tier works!)
+SUPABASE_URL=your_supabase_url
+SUPABASE_KEY=your_supabase_anon_key
+
+# Use OpenAI or local Ollama
+OPENAI_API_KEY=your_openai_key  # Or leave empty for Ollama
+```
+
+**Start Archon services:**
+```bash
+docker-compose up -d
+
+# Verify all services are running
+docker-compose ps
+# Should show: archon-frontend, archon-server, archon-mcp, archon-agents
+```
+
+### 3. Configure Claude Code MCP
+
+Edit `~/.claude.json` (create if it doesn't exist):
+
+```json
+{
+  "mcpServers": {
+    "archon": {
+      "type": "http",
+      "url": "http://localhost:8051",
+      "description": "RAG knowledge base for project context"
+    }
+  }
+}
+```
+
+### 4. Populate Your Knowledge Base
+
+Open Archon UI:
+```bash
+open http://localhost:3737
+# Or visit: http://localhost:3737 in your browser
+```
+
+**Add documentation sources:**
+
+1. **Create a project** for your codebase
+2. **Add sources**:
+   - 📄 Upload PDFs (API docs, architecture diagrams)
+   - 🌐 Crawl websites (framework docs, references)
+   - 📦 Index repositories (your project README, docs/)
+3. **Wait for processing** (watch the progress bar)
+4. **Verify** in the Knowledge tab
+
+**Example sources to add:**
+- Your project's README and `/docs` folder
+- Framework documentation (React, Django, etc.)
+- API specifications
+- Architecture diagrams and design docs
+
+### 5. (Optional) Enable RAG-Enhanced Hooks
+
+For automatic context injection on every prompt:
+
+```bash
+cd my-project
+cp examples/rag-integration/hooks/rag-prompt-enhance.py .claude/hooks/
+chmod +x .claude/hooks/rag-prompt-enhance.py
+```
+
+Edit `.claude/settings.json`:
+```json
+{
+  "hooks": {
+    "userPromptSubmit": {
+      "command": ".claude/hooks/rag-prompt-enhance.py",
+      "enabled": true
+    }
+  }
+}
+```
+
+### 6. (Optional) Add Knowledge Commands
+
+```bash
+mkdir -p .claude/commands/knowledge
+cp examples/rag-integration/commands/knowledge-search.md .claude/commands/knowledge/search.md
+cp examples/rag-integration/commands/knowledge-add.md .claude/commands/knowledge/add.md
+```
+
+Now you can use:
+- `/knowledge:search <query>` - Search documentation
+- `/knowledge:add <source>` - Add new docs
+
+### 7. Start Claude Code
+
+```bash
+cd my-project
+claude-code
+```
+
+### 8. Test RAG Integration
+
+Try asking Claude:
+```
+> How do I implement authentication in this framework?
+```
+
+Claude will:
+1. 🔍 Automatically search your knowledge base
+2. 📚 Find relevant documentation
+3. 💡 Provide context-specific answers with code examples
+4. ✨ Reference your actual project docs
+
+🎉 **You're all set!** Claude now has instant access to your entire knowledge base.
+
+---
+
+## What's the Difference?
+
+| Feature | Basic Setup | Full Setup with RAG |
+|---------|-------------|---------------------|
+| **Hooks & Commands** | ✅ | ✅ |
+| **Code Quality** | ✅ | ✅ |
+| **Security Checks** | ✅ | ✅ |
+| **Doc Search** | ❌ Manual | ✅ Automatic |
+| **Context Injection** | ❌ | ✅ |
+| **Code Examples** | ❌ | ✅ From your docs |
+| **Framework Guidance** | Generic | Project-specific |
+| **Setup Time** | 5 min | 15 min |
+
+💡 **Recommendation**: Start with Basic Setup to get familiar, then add RAG when you're ready for the full experience!
 
 ## What You Get
 
@@ -93,6 +277,10 @@ Quick commands you can type to automate common tasks:
 - `/docs:readme` - Update README
 - `/docs:changelog` - Generate changelog
 - `/docs:generate` - Create API docs
+
+**Knowledge Base** (with RAG setup):
+- `/knowledge:search` - Search your documentation
+- `/knowledge:add` - Add new docs to knowledge base
 
 ### Automatic Quality Checks
 
@@ -273,20 +461,21 @@ Now you get:
 
 See [docs/SETUP.md](docs/SETUP.md#github-actions-setup) for details.
 
-### MCP Servers (Optional)
+### Additional MCP Servers
 
-Extend Claude with extra capabilities by installing MCP servers.
+Beyond Archon RAG, you can add other MCP servers for extended capabilities:
 
-Quick install:
+**GitHub Integration:**
 ```bash
-# GitHub integration
 npm install -g @anthropic/mcp-server-github
+```
 
-# Enhanced thinking
+**Enhanced Thinking:**
+```bash
 npm install -g @anthropic/mcp-server-sequential-thinking
 ```
 
-See [docs/MCP_SERVERS.md](docs/MCP_SERVERS.md) for configuration.
+See [docs/MCP_SERVERS.md](docs/MCP_SERVERS.md) for full configuration guide.
 
 ## FAQ
 
@@ -304,6 +493,70 @@ A: The template is free (MIT license). Claude Code requires a Claude subscriptio
 
 **Q: Can I customize the commands?**
 A: Yes! Edit files in `.claude/commands/` or add your own.
+
+**Q: Do I need RAG/Archon to use this template?**
+A: No! RAG is optional. The basic setup (hooks + commands) works great without it. RAG adds documentation search capabilities.
+
+**Q: Is Archon hard to set up?**
+A: Not at all! It takes ~15 minutes and uses Docker. You'll need a free Supabase account and optionally an OpenAI API key (or use local Ollama).
+
+**Q: What's the benefit of RAG?**
+A: Claude can automatically search your documentation and provide context-specific answers. It's like having your entire knowledge base instantly available.
+
+**Q: Can I use RAG without Archon?**
+A: Archon is our recommended RAG solution, but you could integrate other vector databases. See [docs/RAG_INTEGRATION.md](docs/RAG_INTEGRATION.md) for details.
+
+**Q: Does RAG work offline?**
+A: If you use Ollama for embeddings instead of OpenAI, yes! The entire stack runs locally.
+
+**Q: RAG isn't working, what should I check?**
+A: Verify these:
+1. Archon services running: `docker-compose ps`
+2. MCP configured in `~/.claude.json`
+3. Knowledge base populated (check http://localhost:3737)
+4. Restart Claude Code after MCP changes
+
+## Troubleshooting
+
+### Archon Not Connecting
+
+```bash
+# Check services
+cd ~/Archon
+docker-compose ps
+
+# View logs
+docker-compose logs archon-mcp
+
+# Restart
+docker-compose restart
+```
+
+### RAG Hook Not Enhancing Prompts
+
+```bash
+# Test manually
+echo '{"type": "userPromptSubmit", "prompt": "test"}' | \
+  python3 .claude/hooks/rag-prompt-enhance.py
+
+# Check permissions
+chmod +x .claude/hooks/rag-prompt-enhance.py
+
+# Verify in settings
+cat .claude/settings.json | grep -A 3 userPromptSubmit
+```
+
+### No Search Results
+
+1. **Add documentation** to Archon (http://localhost:3737)
+2. **Wait for indexing** to complete
+3. **Try broader search terms**
+4. **Check relevance threshold** in hook configuration
+
+For more help, see:
+- [RAG Integration Guide](docs/RAG_INTEGRATION.md)
+- [Archon Documentation](https://github.com/coleam00/Archon)
+- [MCP Setup Guide](docs/MCP_SERVERS.md)
 
 ## Contributing
 
@@ -324,8 +577,14 @@ Quick contribution steps:
 
 ## Credits
 
-Built with ❤️ using [Claude Code](https://claude.ai/code) by Anthropic
+Built with ❤️ using:
+- [Claude Code](https://claude.ai/code) by Anthropic
+- [Archon RAG](https://github.com/coleam00/Archon) by @coleam00
+
+Special thanks to the Archon team for building an amazing RAG solution!
 
 ---
 
 **Found this helpful? Star the repo!** ⭐
+
+**Want RAG-powered coding?** See the [Full Setup with RAG](#-option-b-full-setup-with-rag-recommended) guide above!

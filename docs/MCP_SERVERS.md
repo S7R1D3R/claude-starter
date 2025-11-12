@@ -84,6 +84,33 @@ MCP servers are configured in your user-level Claude configuration:
 
 **Security Note**: Specify allowed directories explicitly
 
+#### 4. Archon RAG MCP (Recommended!)
+**Purpose**: RAG-powered knowledge base for project documentation
+
+```json
+{
+  "archon": {
+    "type": "http",
+    "url": "http://localhost:8051",
+    "description": "RAG knowledge base for project context"
+  }
+}
+```
+
+**Setup Required**:
+1. Install Archon: `git clone -b stable https://github.com/coleam00/Archon.git`
+2. Configure Supabase credentials
+3. Start services: `docker-compose up -d`
+4. Populate knowledge base with project docs
+
+**Benefits**:
+- 🔍 Semantic search across all project documentation
+- 📚 Automatic context injection for better responses
+- 💡 Code examples from docs instantly available
+- 🎯 Vector-based relevance matching
+
+**Full Setup Guide**: See [docs/RAG_INTEGRATION.md](RAG_INTEGRATION.md)
+
 ### Development Servers
 
 #### Context7 MCP
