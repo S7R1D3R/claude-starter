@@ -65,7 +65,9 @@ Get everything including RAG-powered documentation access.
 
 ---
 
-## 🤖 Option A: Automated Setup Wizard ⭐ **4 WAYS TO SET UP**
+## 🤖 Option A: Automated Setup Wizard ⭐ **ONE-TIME ONBOARDING**
+
+**⚠️ Important:** The setup wizard is for **INITIAL PROJECT SETUP ONLY**. Run it once when you first add Claude Code to your project. After setup, use slash commands (`/dev:setup`, `/git:commit`, etc.) and hooks for daily development.
 
 Choose the method that fits your workflow best!
 
@@ -76,9 +78,9 @@ git clone https://github.com/yourusername/claude-starter.git my-project
 cd my-project
 ```
 
-### 2. Choose Your Setup Method
+### 2. Choose Your Setup Method (First-Time Only)
 
-#### 💬 Interactive Slash Command (Recommended for First-Time Users)
+#### 💬 Interactive Slash Command (Recommended)
 **Best for:** Learning, first-time setup, understanding features
 **No API key required** - Uses your Claude Code session!
 
@@ -92,17 +94,19 @@ claude-code
 
 Claude will interactively guide you through configuration with explanations. Ask questions as you go!
 
-#### 🤖 Auto-Invoked Skill (Recommended for Daily Use)
-**Best for:** Natural language setup, seamless integration
+#### 🤖 Auto-Invoked Skill (Natural Language)
+**Best for:** Natural language onboarding, first-time setup
 
 ```bash
-# Install the skill
+# Install the skill once
 .claude/skills/setup-wizard/install.sh
 
-# Then just talk to Claude naturally:
+# Then on a NEW/UNCONFIGURED project, just talk naturally:
 "Set up this project for TypeScript"
-"Configure Claude Code with Docker MCP"
+"Configure Claude Code for this repository"
 ```
+
+**Note:** The skill automatically detects if your project is already configured and offers to update/enhance instead of re-running full setup.
 
 #### 🧠 Python Agent (Complex Projects)
 **Best for:** Autonomous setup, dependency installation, complex projects
@@ -600,28 +604,31 @@ Skills are organized folders containing:
 
 This boilerplate includes:
 
-#### 🧙 **setup-wizard** (Recommended - Install First!)
-Intelligent project setup and configuration wizard.
+#### 🧙 **setup-wizard** (For Initial Onboarding)
+Intelligent project setup and configuration wizard for first-time Claude Code setup.
 
 **Installation:**
 ```bash
 .claude/skills/setup-wizard/install.sh
 ```
 
-**Usage:**
+**Usage (On NEW/Unconfigured Projects):**
 ```
-# Just talk naturally - it auto-activates!
+# Just talk naturally - it auto-activates on unconfigured projects!
 "Set up this project for TypeScript"
-"Configure Claude Code with Docker MCP"
+"Configure Claude Code for this repository"
 "Initialize my development environment"
 ```
 
 **What it does:**
+- **Checks** if project is already configured (won't re-run on configured projects)
 - Detects your programming languages and frameworks
 - Recommends optimal Claude Code configurations
 - Installs dependencies and sets up tools
 - Configures hooks, MCP servers, and GitHub Actions
 - Provides personalized recommendations
+
+**Smart Detection:** If project is already configured, offers to update/enhance instead of full setup.
 
 #### 🚀 **session-start-hook**
 Creates and develops startup hooks for Claude Code sessions.

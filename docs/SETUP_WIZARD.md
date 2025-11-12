@@ -2,6 +2,22 @@
 
 Complete guide to the Claude Code Starter automated setup wizards.
 
+## ⚠️ Important: One-Time Onboarding Only
+
+**The setup wizard is for INITIAL PROJECT SETUP only!**
+
+- ✅ **Run ONCE** when you first add Claude Code to a project
+- ✅ **Run ONCE** when onboarding a new team member to a project
+- ❌ **DO NOT** run repeatedly during daily development
+- ❌ **DO NOT** run on already-configured projects
+
+**After initial setup, use:**
+- Slash commands (`/dev:setup`, `/quality:test`, `/git:commit`, etc.)
+- Hooks (automatic code quality, security, formatting)
+- Skills (for specialized tasks like code review, testing, etc.)
+
+---
+
 ## Table of Contents
 
 - [Overview](#overview)
@@ -9,6 +25,7 @@ Complete guide to the Claude Code Starter automated setup wizards.
 - [Wizard Options](#wizard-options)
 - [Basic Wizard](#basic-wizard)
 - [AI-Powered Wizard](#ai-powered-wizard)
+- [Slash Command & Skill](#slash-command--skill)
 - [What Gets Configured](#what-gets-configured)
 - [Installation Options](#installation-options)
 - [Troubleshooting](#troubleshooting)
@@ -18,13 +35,16 @@ Complete guide to the Claude Code Starter automated setup wizards.
 
 ## Overview
 
-The Claude Code Starter boilerplate includes **three setup wizards** to help you configure your development environment:
+The Claude Code Starter boilerplate includes **FOUR setup methods** for initial project onboarding:
 
-1. **Shell Wizard** (`setup-wizard.sh`) - Fast bash script for basic setup
-2. **Basic Python Wizard** (`setup-agent.py`) - Interactive Python wizard with auto-detection
-3. **AI-Powered Wizard** (`setup-agent.py --ai`) - Intelligent wizard using Claude Agent SDK
+1. **Slash Command** (`/setup:wizard`) - Interactive wizard inside Claude Code (Recommended) ⭐
+2. **Auto-Invoked Skill** (setup-wizard) - Natural language activation (auto-detects unconfigured projects)
+3. **Python Agent** (`scripts/wizard/setup_agent.py`) - Autonomous setup with project detection
+4. **Shell Script** (`scripts/setup-wizard.sh`) - Fast bash script for CI/CD
 
-Choose the wizard that best fits your needs and environment.
+**All methods check if your project is already configured** and won't re-run full setup on configured projects.
+
+Choose the method that best fits your needs and environment.
 
 ---
 
@@ -165,6 +185,78 @@ python scripts/setup-agent.py --help
 │  • Productivity suggestions         │
 │  • Advanced features                │
 └─────────────────────────────────────┘
+```
+
+---
+
+## Slash Command & Skill (Recommended) ⭐
+
+### Slash Command: `/setup:wizard`
+
+**Best for:** First-time interactive setup, learning about features
+
+**Usage:**
+```bash
+# Start Claude Code
+claude-code
+
+# Then run:
+/setup:wizard
+```
+
+**Features:**
+- ✅ **No API key required** - Uses your current Claude Code session
+- ✅ **Interactive** - Ask questions as you go
+- ✅ **Educational** - Explains features and options
+- ✅ **Smart detection** - Checks if project is already configured
+- ✅ **Conversational** - Natural language interaction
+
+**What happens:**
+1. Checks if project is already configured
+   - If YES: Offers to update/enhance instead of full setup
+   - If NO: Proceeds with full interactive wizard
+2. Analyzes your project (languages, frameworks, tools)
+3. Asks about your preferences (hooks, MCP servers, etc.)
+4. Configures Claude Code optimally
+5. Validates setup and provides next steps
+
+### Auto-Invoked Skill: `setup-wizard`
+
+**Best for:** Natural language onboarding
+
+**Installation:**
+```bash
+# Install once
+.claude/skills/setup-wizard/install.sh
+```
+
+**Usage (on NEW/unconfigured projects):**
+```
+# Just talk naturally:
+"Set up this project for TypeScript"
+"Configure Claude Code for this repository"
+"Initialize development environment"
+```
+
+**Smart Behavior:**
+- **On unconfigured projects**: Runs full setup wizard
+- **On configured projects**: Offers to update/enhance, NOT full setup
+
+**Example:**
+```
+You: "Set up this project"
+
+Claude: [setup-wizard skill activates]
+        [Checks .claude/settings.json]
+
+        ⚠️ This project appears to already have Claude Code configured!
+
+        Instead of re-running setup, I can help you:
+        1. Review your current configuration
+        2. Add specific features (MCP servers, new hooks)
+        3. Update to latest best practices
+
+        What would you like to do?
 ```
 
 ---
