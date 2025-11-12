@@ -1,346 +1,331 @@
 # Claude Code Starter Boilerplate
 
-> A comprehensive, language-agnostic starter template featuring all the latest Claude Code capabilities for maximum AI-assisted development productivity.
+A ready-to-use template that supercharges your development with AI automation, code quality tools, and intelligent workflows for any programming language.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-2025-purple)](https://claude.ai/code)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
-## Features
+## What is This?
 
-- **Intelligent Hooks** - Automated code quality, security validation, and prompt enhancement
-- **20+ Slash Commands** - Pre-built workflows for development, git, quality checks, and documentation
-- **GitHub Actions** - AI-powered PR reviews, issue handling, and automated documentation
-- **Expert Skills** - Code review and testing expertise modules
-- **MCP Integration** - Ready-to-use Model Context Protocol server configurations
-- **Language Agnostic** - Auto-detects your tech stack and adapts accordingly
-- **Production Ready** - Battle-tested hooks and workflows from 2025 best practices
+This is a **starter template** that adds powerful AI capabilities to your coding projects. Think of it as a smart assistant that:
+- Automatically checks your code quality
+- Prevents security mistakes
+- Formats and organizes your code
+- Helps you write better commits and pull requests
+- Works with **any programming language** (JavaScript, Python, Rust, Go, Java, etc.)
 
-## Quick Start
+## How to Use This
 
-### 1. Installation
+### Step 1: Get the Template
 
+**Option A: Start a new project**
 ```bash
-# Clone this repository (or use as GitHub template)
-git clone https://github.com/yourusername/claude-starter.git
-cd claude-starter
-
-# Run setup wizard
+git clone https://github.com/yourusername/claude-starter.git my-project
+cd my-project
 ./scripts/setup-wizard.sh
 ```
 
-### 2. Essential Commands
+**Option B: Add to an existing project**
+```bash
+# Copy the .claude folder to your existing project
+cp -r /path/to/claude-starter/.claude /path/to/your-project/
+cd /path/to/your-project
+chmod +x .claude/hooks/*.py
+```
+
+### Step 2: Install Your Project Dependencies
+
+The template auto-detects your language and suggests the right commands:
 
 ```bash
-# Initialize project
-/dev:init
+# Node.js / JavaScript / TypeScript
+npm install
 
-# Install dependencies
-/dev:setup
+# Python
+pip install -r requirements.txt
 
-# Run tests
-/quality:test
+# Rust
+cargo build
 
-# Create commit
-/git:commit
+# Go
+go mod download
 
-# Create PR
-/git:pr
+# Or use the quick command:
+# Just type in Claude Code: /dev:setup
 ```
 
-### 3. Start Coding
+### Step 3: Start Using Claude Code
 
-Open Claude Code in your project directory and start coding! The hooks will automatically:
-- Enhance your prompts with project context
-- Validate security before operations
-- Auto-format and lint code after edits
-- Run quality checks on completion
-
-## Project Structure
-
-```
-claude-starter/
-├── .claude/
-│   ├── settings.json              # Hook and permission configuration
-│   ├── CLAUDE.md                  # Project context for AI
-│   ├── commands/                  # 20+ slash commands
-│   │   ├── dev/                   # Development commands
-│   │   ├── git/                   # Git workflow commands
-│   │   ├── quality/               # Code quality commands
-│   │   ├── docs/                  # Documentation commands
-│   │   └── ai/                    # AI enhancement commands
-│   ├── hooks/                     # Automated event handlers
-│   │   ├── session-start.py       # Session initialization
-│   │   ├── user-prompt-submit.py  # Prompt enhancement
-│   │   ├── pre-tool-use.py        # Security validation
-│   │   ├── post-tool-use.py       # Auto quality checks
-│   │   ├── stop.py                # Final validation
-│   │   └── notification.py        # Desktop notifications
-│   └── skills/                    # Expert knowledge modules
-│       ├── code-review/           # Code review expertise
-│       └── testing/               # Testing expertise
-├── .github/workflows/             # GitHub Actions
-│   ├── claude-pr-review.yml       # AI PR reviews
-│   ├── claude-issue-handler.yml   # Issue automation
-│   └── claude-docs-update.yml     # Documentation sync
-├── docs/                          # Comprehensive documentation
-├── scripts/                       # Setup and utility scripts
-├── templates/                     # Reusable templates
-└── README.md                      # This file
+Open Claude Code in your project:
+```bash
+claude-code
 ```
 
-## Slash Commands Reference
+That's it! The template is now active and will automatically help you code better.
 
-### Development (`/dev:`)
-- `/dev:init` - Initialize new project with auto-detection
-- `/dev:setup` - Install dependencies
+## What You Get
+
+### Smart Slash Commands
+
+Quick commands you can type to automate common tasks:
+
+**Development:**
+- `/dev:setup` - Install project dependencies
+- `/dev:build` - Build your project
 - `/dev:serve` - Start development server
-- `/dev:build` - Build for production
-- `/dev:clean` - Clean build artifacts
+- `/dev:clean` - Clean build files
 
-### Git Operations (`/git:`)
-- `/git:commit` - Create conventional commit
-- `/git:pr` - Generate and create pull request
-- `/git:sync` - Sync with remote
-- `/git:branch` - Create feature branch
+**Git Workflows:**
+- `/git:commit` - Create a well-formatted commit message
+- `/git:pr` - Create a pull request with description
+- `/git:branch` - Create a new feature branch
+- `/git:sync` - Sync with remote repository
 
-### Code Quality (`/quality:`)
-- `/quality:review` - Comprehensive code review
-- `/quality:lint` - Run linters
-- `/quality:format` - Auto-format code
-- `/quality:test` - Run test suite
-- `/quality:security` - Security vulnerability scan
+**Code Quality:**
+- `/quality:test` - Run your test suite
+- `/quality:lint` - Check code style
+- `/quality:format` - Auto-format all code
+- `/quality:review` - Get AI code review
+- `/quality:security` - Scan for security issues
 
-### Documentation (`/docs:`)
-- `/docs:generate` - Generate API documentation
+**Documentation:**
 - `/docs:readme` - Update README
 - `/docs:changelog` - Generate changelog
+- `/docs:generate` - Create API docs
 
-### AI Enhancement (`/ai:`)
-- `/ai:context` - Load full project context
-- `/ai:refactor` - Intelligent refactoring
-- `/ai:explain` - Explain complex code
+### Automatic Quality Checks
 
-## Hooks System
+The template runs checks automatically as you code:
 
-### Automatic Workflows
+✅ **Security Validation** - Blocks dangerous commands before they run
+✅ **Auto-Formatting** - Formats code after you write it
+✅ **Smart Prompts** - Adds context to help Claude understand your project
+✅ **Test Running** - Reminds you to test after changes
 
-Hooks run automatically at specific points in your workflow:
+### GitHub Integration (Optional)
 
-**session-start** → Displays project context and git status
-**user-prompt-submit** → Enhances prompts with context
-**pre-tool-use** → Blocks dangerous operations
-**post-tool-use** → Auto-formats and lints code
-**stop** → Validates completion and sends notifications
+If you push to GitHub, you get:
+- AI-powered code reviews on pull requests
+- Automatic issue handling
+- Documentation updates
 
-### Security Features
+*(Requires adding your `ANTHROPIC_API_KEY` to GitHub secrets)*
 
-The `pre-tool-use` hook protects against:
-- Dangerous bash commands (`rm -rf /`, `sudo rm`, etc.)
-- Modifications to sensitive files (.env, credentials, keys)
-- Writes to system directories
-- All security events are logged
+## Understanding the Template
 
-### Quality Automation
+### What's Inside?
 
-The `post-tool-use` hook automatically:
-- Formats code (Prettier, Black, rustfmt, etc.)
-- Runs linters (ESLint, pylint, clippy, etc.)
-- Suggests improvements
-- Logs all quality checks
-
-## GitHub Actions Integration
-
-### PR Review Workflow
-Automatically reviews pull requests for:
-- Code quality issues
-- Security vulnerabilities
-- Performance problems
-- Best practice violations
-
-Trigger: Opening/updating PR or commenting `@claude`
-
-### Issue Handler Workflow
-Automatically generates implementation plans for issues:
-- Analyzes requirements
-- Suggests technical approach
-- Creates feature branches
-- Provides step-by-step plan
-
-Trigger: Labeling issue with `claude` or commenting `@claude`
-
-### Documentation Update Workflow
-Keeps documentation in sync with code:
-- Weekly automatic updates
-- Updates API docs
-- Refreshes README examples
-- Generates changelog entries
-
-Trigger: Weekly schedule or manual dispatch
-
-## MCP Server Configuration
-
-Recommended MCP servers to enhance Claude Code:
-
-### Essential Servers
-- **GitHub MCP** - PR and issue management
-- **Sequential Thinking** - Complex problem breakdown
-- **Filesystem MCP** - Enhanced file operations
-
-### Optional Servers
-- **Context7** - Library documentation access
-- **Postgres MCP** - Database queries
-- **Puppeteer MCP** - Web automation
-
-See [docs/MCP_SERVERS.md](docs/MCP_SERVERS.md) for setup instructions.
-
-## Configuration
-
-### Project Settings (`.claude/settings.json`)
-```json
-{
-  "hooks": {
-    "sessionStart": { "enabled": true },
-    "userPromptSubmit": { "enabled": true },
-    "preToolUse": { "enabled": true },
-    "postToolUse": { "enabled": true }
-  },
-  "permissions": {
-    "bash": "ask",
-    "write": "ask",
-    "edit": "auto"
-  }
-}
+```
+your-project/
+└── .claude/                    # All the magic lives here
+    ├── commands/               # Slash commands (/dev:setup, /git:commit, etc.)
+    ├── hooks/                  # Automation scripts (security, formatting, etc.)
+    ├── skills/                 # AI expertise modules
+    └── settings.json           # Configuration
 ```
 
-### User Settings (`~/.claude.json`)
-MCP server configuration (keeps API keys private):
-```json
-{
-  "mcpServers": {
-    "github": {
-      "type": "stdio",
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-github"],
-      "env": { "GITHUB_TOKEN": "your_token" }
-    }
-  }
-}
+### How It Works
+
+1. **Hooks** run automatically when you code:
+   - `session-start` - Shows project info when you start
+   - `pre-tool-use` - Prevents dangerous commands
+   - `post-tool-use` - Auto-formats your code
+   - `stop` - Final checks before finishing
+
+2. **Slash Commands** give you quick actions:
+   - Type `/quality:test` instead of remembering test commands
+   - Type `/git:commit` for well-formatted commits
+   - Type `/dev:setup` to install dependencies
+
+3. **Skills** add expert knowledge:
+   - Code review expertise
+   - Testing best practices
+   - More coming soon!
+
+## Common Tasks
+
+### Running Tests
+```bash
+# In Claude Code, just type:
+/quality:test
+
+# Or manually:
+npm test        # Node.js
+pytest          # Python
+cargo test      # Rust
+go test ./...   # Go
 ```
 
-## Language Support
+### Creating a Commit
+```bash
+# In Claude Code:
+/git:commit
 
-This boilerplate automatically adapts to your project:
+# Claude will:
+# 1. Check what changed
+# 2. Write a clear commit message
+# 3. Create the commit
+```
 
-| Language | Auto-Detected | Formatter | Linter | Test Runner |
-|----------|--------------|-----------|--------|-------------|
-| JavaScript/TypeScript | ✅ | Prettier | ESLint | Jest/Vitest |
-| Python | ✅ | Black | Pylint/Flake8 | pytest |
-| Rust | ✅ | rustfmt | Clippy | cargo test |
-| Go | ✅ | gofmt | golint | go test |
-| Java | ✅ | google-java-format | Checkstyle | JUnit |
-| Ruby | ✅ | RuboCop | RuboCop | RSpec |
-| PHP | ✅ | PHP-CS-Fixer | PHPCS | PHPUnit |
-| C/C++ | ✅ | clang-format | clang-tidy | GTest |
+### Creating a Pull Request
+```bash
+# In Claude Code:
+/git:pr
 
-## Best Practices
+# Claude will:
+# 1. Review your changes
+# 2. Write a detailed PR description
+# 3. Create the pull request
+```
 
-### Before Coding
-1. Run `/dev:setup` to ensure dependencies are installed
-2. Review `CLAUDE.md` for project conventions
-3. Create feature branch with `/git:branch`
+### Code Review
+```bash
+# In Claude Code:
+/quality:review
 
-### During Development
-1. Let hooks handle formatting and linting
-2. Use `/quality:review` for code review
-3. Run `/quality:test` after changes
-
-### Before Committing
-1. Run `/quality:review` for final check
-2. Ensure all tests pass with `/quality:test`
-3. Use `/git:commit` for conventional commits
-4. Create PR with `/git:pr`
-
-## Documentation
-
-- [Setup Guide](docs/SETUP.md) - Detailed installation and configuration
-- [Hooks Reference](docs/HOOKS.md) - Complete hooks documentation
-- [Commands Guide](docs/COMMANDS.md) - All slash commands explained
-- [MCP Servers](docs/MCP_SERVERS.md) - MCP integration guide
+# You'll get:
+# - Style suggestions
+# - Security checks
+# - Best practice recommendations
+```
 
 ## Customization
 
-### Adding Custom Commands
-Create `.claude/commands/custom/mycommand.md`:
-```markdown
----
-description: My custom command
----
+### Turn Features On/Off
 
-# My Custom Command
+Edit `.claude/settings.json`:
 
-Instructions for Claude to execute this command...
+```json
+{
+  "hooks": {
+    "sessionStart": { "enabled": true },      // Session info
+    "preToolUse": { "enabled": true },        // Security checks
+    "postToolUse": { "enabled": false }       // Auto-formatting (turned off)
+  }
+}
 ```
 
-Usage: `/custom:mycommand`
+### Add Your Own Commands
 
-### Adding Custom Hooks
-Create `.claude/hooks/custom-hook.py` and register in `settings.json`
+Create `.claude/commands/mycustom/hello.md`:
 
-### Extending Skills
-Add new skills in `.claude/skills/[skill-name]/SKILL.md`
+```markdown
+---
+description: Say hello
+---
 
-## Troubleshooting
+Print "Hello World!" to the user.
+```
 
-### Hooks Not Running
-1. Ensure hooks are executable: `chmod +x .claude/hooks/*.py`
-2. Check Python is installed: `python3 --version`
-3. Verify settings.json configuration
+Now you can use `/mycustom:hello` in Claude Code!
 
-### Commands Not Found
-1. Restart Claude Code to reload commands
-2. Check file names match command structure
-3. Verify markdown frontmatter is correct
+## Supported Languages
 
-### GitHub Actions Failing
-1. Add `ANTHROPIC_API_KEY` to repository secrets
-2. Verify `GITHUB_TOKEN` has correct permissions
-3. Check workflow file syntax
+Works automatically with:
 
-See [docs/SETUP.md#troubleshooting](docs/SETUP.md#troubleshooting) for more help.
+- **JavaScript / TypeScript** (Node.js, React, Vue, etc.)
+- **Python** (Django, Flask, FastAPI, etc.)
+- **Rust** (Cargo projects)
+- **Go** (Go modules)
+- **Java** (Maven, Gradle)
+- **Ruby** (Rails, Sinatra)
+- **PHP** (Laravel, Symfony)
+- **C / C++** (CMake, Make)
+
+The template auto-detects your language and uses the right tools.
+
+## Need Help?
+
+### Quick Fixes
+
+**Hooks not working?**
+```bash
+chmod +x .claude/hooks/*.py
+python3 --version  # Must be 3.7+
+```
+
+**Commands not found?**
+- Restart Claude Code
+- Check `.claude/commands/` folder exists
+
+**Want detailed docs?**
+- [Complete Setup Guide](docs/SETUP.md)
+- [Hooks Documentation](docs/HOOKS.md)
+- [Commands Reference](docs/COMMANDS.md)
+
+## Advanced Features
+
+### GitHub Actions (Optional)
+
+Set up AI-powered automation for your GitHub repo:
+
+1. **Go to your GitHub repository settings**
+2. **Add secret**: Settings → Secrets → New repository secret
+   - Name: `ANTHROPIC_API_KEY`
+   - Value: Your API key from [console.anthropic.com](https://console.anthropic.com)
+3. **Enable workflows**: Settings → Actions → General → Allow all actions
+
+Now you get:
+- **Automatic PR reviews** - AI reviews every pull request
+- **Issue planning** - Tag issues with `@claude` for implementation plans
+- **Doc updates** - Weekly documentation sync
+
+See [docs/SETUP.md](docs/SETUP.md#github-actions-setup) for details.
+
+### MCP Servers (Optional)
+
+Extend Claude with extra capabilities by installing MCP servers.
+
+Quick install:
+```bash
+# GitHub integration
+npm install -g @anthropic/mcp-server-github
+
+# Enhanced thinking
+npm install -g @anthropic/mcp-server-sequential-thinking
+```
+
+See [docs/MCP_SERVERS.md](docs/MCP_SERVERS.md) for configuration.
+
+## FAQ
+
+**Q: Do I need to install Claude Code?**
+A: Yes, this is a template for Claude Code. Get it at [claude.ai/code](https://claude.ai/code)
+
+**Q: Will this work with my existing project?**
+A: Absolutely! Just copy the `.claude` folder to your project.
+
+**Q: What if I don't want auto-formatting?**
+A: Disable it in `.claude/settings.json` - set `postToolUse.enabled` to `false`
+
+**Q: Is this free?**
+A: The template is free (MIT license). Claude Code requires a Claude subscription.
+
+**Q: Can I customize the commands?**
+A: Yes! Edit files in `.claude/commands/` or add your own.
 
 ## Contributing
 
-Contributions are welcome! Please:
-1. Fork the repository
+We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
+Quick contribution steps:
+1. Fork this repo
 2. Create a feature branch
 3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
+4. Submit a pull request
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
+## Resources
 
-## Changelog
+- **Full Documentation**: [docs/](docs/)
+- **Changelog**: [CHANGELOG.md](CHANGELOG.md)
+- **License**: [MIT License](LICENSE)
+- **Issues**: [Report a bug](https://github.com/yourusername/claude-starter/issues)
 
-See [CHANGELOG.md](CHANGELOG.md) for version history.
+## Credits
 
-## License
-
-MIT License - see [LICENSE](LICENSE) for details.
-
-## Acknowledgments
-
-- Built on [Claude Code](https://claude.ai/code) by Anthropic
-- Inspired by the Claude Code community
-- Incorporates 2025 best practices
-- Based on research from official Claude Code documentation
-
-## Support
-
-- **Issues**: [GitHub Issues](https://github.com/yourusername/claude-starter/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/yourusername/claude-starter/discussions)
-- **Documentation**: [docs/](docs/)
+Built with ❤️ using [Claude Code](https://claude.ai/code) by Anthropic
 
 ---
 
-**Made with Claude Code** | **Star this repo if it helps you!**
+**Found this helpful? Star the repo!** ⭐
