@@ -39,18 +39,80 @@ No more manually searching docs or copy-pasting context!
 
 Choose your setup path:
 
-### 🚀 Option A: Basic Setup (5 minutes)
+### 🤖 Option A: Automated Setup Wizard (2 minutes) ⭐ **NEW!**
+AI-powered wizard that automatically detects and configures everything.
+
+### 🚀 Option B: Basic Manual Setup (5 minutes)
 Get started with hooks and commands only.
 
-### 🐳 Option B: Docker MCP Toolkit (10 minutes) ⭐ **NEW!**
+### 🐳 Option C: Docker MCP Toolkit (10 minutes)
 One-click MCP server deployment with visual management.
 
-### 🎯 Option C: Full Setup with RAG (15 minutes) ⭐ **Advanced**
+### 🎯 Option D: Full Setup with RAG (15 minutes) ⭐ **Advanced**
 Get everything including RAG-powered documentation access.
 
 ---
 
-## 🚀 Option A: Basic Setup
+## 🤖 Option A: Automated Setup Wizard
+
+The fastest way to get started! The wizard automatically detects your project and configures everything.
+
+### 1. Get the Template
+
+```bash
+git clone https://github.com/yourusername/claude-starter.git my-project
+cd my-project
+```
+
+### 2. Run the Wizard
+
+**Basic Wizard (Recommended):**
+```bash
+python scripts/setup-agent.py
+```
+
+**AI-Powered Wizard (Advanced):**
+```bash
+# Install Claude Agent SDK
+pip install claude-agent-sdk
+
+# Set your API key
+export ANTHROPIC_API_KEY="sk-ant-your-key-here"
+
+# Run AI wizard
+python scripts/setup-agent.py --ai
+```
+
+**Shell Wizard (Fastest):**
+```bash
+./scripts/setup-wizard.sh
+```
+
+### 3. What the Wizard Does
+
+The wizard automatically:
+- ✅ Detects your programming languages and frameworks
+- ✅ Identifies package managers (npm, pip, cargo, etc.)
+- ✅ Configures hooks and slash commands
+- ✅ Makes all scripts executable
+- ✅ Creates necessary directories
+- ✅ Optionally installs dependencies
+- ✅ Validates the setup
+- ✅ Provides personalized recommendations
+
+### 4. Start Coding
+
+```bash
+claude-code
+```
+
+The AI wizard provides intelligent, context-aware setup with personalized recommendations!
+
+**See the full guide:** [docs/SETUP_WIZARD.md](docs/SETUP_WIZARD.md)
+
+---
+
+## 🚀 Option B: Basic Manual Setup
 
 ### 1. Get the Template
 
@@ -97,7 +159,7 @@ claude-code
 
 ---
 
-## 🐳 Option B: Docker MCP Toolkit Setup (NEW!)
+## 🐳 Option C: Docker MCP Toolkit Setup
 
 The easiest way to add powerful MCP servers to Claude Code!
 
@@ -175,7 +237,7 @@ claude-code
 
 ---
 
-## 🎯 Option C: Full Setup with RAG (Advanced)
+## 🎯 Option D: Full Setup with RAG (Advanced)
 
 Get the complete experience with RAG-powered documentation access!
 
