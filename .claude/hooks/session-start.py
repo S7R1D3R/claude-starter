@@ -26,35 +26,83 @@ def run_command(cmd):
         return None
 
 def detect_language():
-    """Detect primary programming language"""
-    extensions = {
-        '.py': 'Python',
-        '.js': 'JavaScript',
-        '.ts': 'TypeScript',
-        '.rs': 'Rust',
-        '.go': 'Go',
-        '.java': 'Java',
-        '.rb': 'Ruby',
-        '.php': 'PHP',
-        '.cpp': 'C++',
-        '.c': 'C',
-        '.cs': 'C#',
-        '.swift': 'Swift',
-        '.kt': 'Kotlin'
-    }
+    """Detect primary programming language (optimized with caching)"""
+    # Check cache first (valid for 1 hour)
+    cache_file = Path('.claude/.cache/language-detect.json')
+    cache_file.parent.mkdir(parents=True, exist_ok=True)
 
     try:
-        # Count files by extension
-        counts = {}
-        for ext, lang in extensions.items():
-            result = run_command(f"find . -type f -name '*{ext}' | wc -l")
-            if result:
-                count = int(result)
-                if count > 0:
-                    counts[lang] = count
+        if cache_file.exists():
+            import time
+            cache_age = time.time() - cache_file.stat().st_mtime
+            if cache_age < 3600:  # 1 hour
+                with open(cache_file, 'r') as f:
+                    return json.load(f)['language']
+    except Exception:
+        pass
 
-        if counts:
-            return max(counts.items(), key=lambda x: x[1])[0]
+    # Fast config-based detection first
+    config_hints = {
+        'package.json': 'JavaScript',
+        'tsconfig.json': 'TypeScript',
+        'Cargo.toml': 'Rust',
+        'go.mod': 'Go',
+        'pom.xml': 'Java',
+        'build.gradle': 'Java',
+        'requirements.txt': 'Python',
+        'pyproject.toml': 'Python',
+        'Gemfile': 'Ruby',
+        'composer.json': 'PHP',
+    }
+
+    for config, lang in config_hints.items():
+        if Path(config).exists():
+            # Cache result
+            try:
+                with open(cache_file, 'w') as f:
+                    json.dump({'language': lang}, f)
+            except Exception:
+                pass
+            return lang
+
+    # Fallback: optimized file counting (single find command with exclusions)
+    try:
+        # Exclude common directories
+        exclude_dirs = [
+            'node_modules', '.git', 'venv', '.venv', 'env', '.env',
+            'target', 'build', 'dist', '__pycache__', '.cache',
+            'vendor', '.idea', '.vscode', 'coverage'
+        ]
+
+        exclude_pattern = ' '.join([f"-path '*/{d}' -prune -o" for d in exclude_dirs])
+
+        # Single find command for common extensions
+        find_cmd = f"find . {exclude_pattern} -type f \\( -name '*.py' -o -name '*.js' -o -name '*.ts' -o -name '*.rs' -o -name '*.go' -o -name '*.java' \\) -print"
+        result = run_command(find_cmd)
+
+        if result:
+            # Count by extension
+            counts = {}
+            ext_map = {
+                '.py': 'Python', '.js': 'JavaScript', '.ts': 'TypeScript',
+                '.rs': 'Rust', '.go': 'Go', '.java': 'Java'
+            }
+
+            for line in result.split('\n'):
+                for ext, lang in ext_map.items():
+                    if line.endswith(ext):
+                        counts[lang] = counts.get(lang, 0) + 1
+                        break
+
+            if counts:
+                detected = max(counts.items(), key=lambda x: x[1])[0]
+                # Cache result
+                try:
+                    with open(cache_file, 'w') as f:
+                        json.dump({'language': detected, 'counts': counts}, f)
+                except Exception:
+                    pass
+                return detected
     except Exception:
         pass
 

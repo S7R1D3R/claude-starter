@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Ask a Question
+    url: https://github.com/S7R1D3R/claude-starter/discussions
+    about: Ask questions and discuss ideas with the community
+  - name: Claude Code Documentation
+    url: https://docs.claude.com/claude-code
+    about: Official Claude Code documentation
+  - name: Security Issue
+    url: https://github.com/S7R1D3R/claude-starter/security/advisories/new
+    about: Report a security vulnerability (private)

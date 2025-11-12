@@ -11,6 +11,9 @@ import subprocess
 from pathlib import Path
 from datetime import datetime
 
+# Cache for tool availability (persists during hook execution)
+_TOOL_CACHE = {}
+
 # Language-specific tools configuration
 FORMATTERS = {
     '.py': ['black', 'autopep8', 'yapf'],
@@ -64,10 +67,21 @@ def run_command(cmd, timeout=10):
         return {'success': False, 'error': str(e)}
 
 def check_tool_available(tool_cmd):
-    """Check if a tool is installed"""
+    """Check if a tool is installed (with caching)"""
     tool_name = tool_cmd.split()[0]
+
+    # Check cache first
+    if tool_name in _TOOL_CACHE:
+        return _TOOL_CACHE[tool_name]
+
+    # Check tool availability
     result = run_command(f"which {tool_name} 2>/dev/null", timeout=2)
-    return result.get('success', False)
+    is_available = result.get('success', False)
+
+    # Cache result
+    _TOOL_CACHE[tool_name] = is_available
+
+    return is_available
 
 def format_file(file_path):
     """Auto-format file based on extension"""
