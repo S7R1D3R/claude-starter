@@ -288,6 +288,42 @@ npm install -g @anthropic/mcp-server-sequential-thinking
 
 See [docs/MCP_SERVERS.md](docs/MCP_SERVERS.md) for configuration.
 
+### RAG Integration (Advanced)
+
+Add **Retrieval-Augmented Generation** to automatically provide context from your project documentation.
+
+**What is RAG?**
+RAG gives Claude instant access to your entire knowledge base using semantic search and vector embeddings.
+
+**Quick Setup:**
+```bash
+# Install Archon (RAG knowledge base)
+git clone -b stable https://github.com/coleam00/Archon.git
+cd Archon
+docker-compose up -d
+
+# Configure MCP connection in ~/.claude.json
+{
+  "mcpServers": {
+    "archon": {
+      "type": "http",
+      "url": "http://localhost:8051"
+    }
+  }
+}
+
+# Add your project docs
+# Open http://localhost:3737 and upload documentation
+```
+
+**Benefits:**
+- 🔍 Claude automatically searches your documentation
+- 📚 Better answers based on your specific project
+- 💡 Instant access to code examples from docs
+- 🎯 Context-aware recommendations
+
+**Full Guide**: [docs/RAG_INTEGRATION.md](docs/RAG_INTEGRATION.md)
+
 ## FAQ
 
 **Q: Do I need to install Claude Code?**
