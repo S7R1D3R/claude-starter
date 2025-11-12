@@ -2,6 +2,34 @@
 
 Model Context Protocol (MCP) servers extend Claude Code with external tool access, databases, APIs, and services.
 
+## 🚀 NEW: Docker MCP Toolkit (Recommended!)
+
+**The easiest way to set up MCP servers is with Docker MCP Toolkit!**
+
+Docker MCP Toolkit provides:
+- 📦 **200+ pre-built MCP servers** in a curated catalog
+- 🖱️ **One-click deployment** from Docker Desktop UI
+- 🔒 **Secure credential management** built-in
+- ⚡ **Containerized isolation** prevents conflicts
+- 🎯 **Visual management** instead of JSON editing
+
+**Prerequisites**: Docker Desktop 4.40+ with MCP Toolkit enabled
+
+**Quick Start**:
+1. Enable MCP Toolkit in Docker Desktop → Settings → Beta Features
+2. Open MCP Toolkit in Docker Desktop sidebar
+3. Browse Catalog and add servers (Filesystem, GitHub, etc.)
+4. Connect Claude Code from the Clients tab
+5. Done! No manual JSON editing needed.
+
+**Full Guide**: See [DOCKER_MCP_TOOLKIT.md](DOCKER_MCP_TOOLKIT.md) for complete setup instructions.
+
+---
+
+## Manual MCP Setup (Alternative)
+
+If you prefer manual configuration or need custom servers, use the traditional approach below:
+
 ## Quick Setup
 
 ### 1. Configuration Location

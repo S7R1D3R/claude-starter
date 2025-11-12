@@ -166,6 +166,10 @@ config/secrets.yml
 *.sqlite
 *.sqlite3
 
+# MCP Configuration (Docker MCP Toolkit)
+.mcp.json
+.mcp.*.json
+
 # Compiled files
 *.com
 *.class

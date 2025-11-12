@@ -17,6 +17,14 @@ This is a **starter template** that adds powerful AI capabilities to your coding
 - 📝 Helps you write better commits and pull requests
 - 🌐 Works with **any programming language** (JavaScript, Python, Rust, Go, Java, etc.)
 
+### ⭐ NEW: Docker MCP Toolkit Integration
+
+**One-click MCP server deployment** is now available!
+- 200+ pre-built MCP servers in a curated catalog
+- Visual UI management in Docker Desktop
+- Secure credential handling with zero config files
+- Containerized isolation prevents dependency conflicts
+
 ### ⭐ NEW: RAG Integration with Archon
 
 Claude now has **instant access to your entire knowledge base**:
@@ -34,7 +42,10 @@ Choose your setup path:
 ### 🚀 Option A: Basic Setup (5 minutes)
 Get started with hooks and commands only.
 
-### 🎯 Option B: Full Setup with RAG (15 minutes) ⭐ **Recommended**
+### 🐳 Option B: Docker MCP Toolkit (10 minutes) ⭐ **NEW!**
+One-click MCP server deployment with visual management.
+
+### 🎯 Option C: Full Setup with RAG (15 minutes) ⭐ **Advanced**
 Get everything including RAG-powered documentation access.
 
 ---
@@ -86,7 +97,85 @@ claude-code
 
 ---
 
-## 🎯 Option B: Full Setup with RAG (Recommended)
+## 🐳 Option B: Docker MCP Toolkit Setup (NEW!)
+
+The easiest way to add powerful MCP servers to Claude Code!
+
+### 1. Install Docker Desktop 4.40+
+
+Download from https://www.docker.com/products/docker-desktop/
+
+```bash
+# Verify installation
+docker --version
+# Must be 4.40 or newer
+```
+
+### 2. Enable MCP Toolkit
+
+1. Open Docker Desktop
+2. Go to **Settings** → **Beta Features**
+3. Enable **"Enable Docker MCP Toolkit"**
+4. Click **Apply & Restart**
+
+### 3. Get the Template
+
+```bash
+git clone https://github.com/yourusername/claude-starter.git my-project
+cd my-project
+chmod +x .claude/hooks/*.py
+```
+
+### 4. Add MCP Servers
+
+1. In Docker Desktop, click **MCP Toolkit** in the sidebar
+2. Go to the **Catalog** tab
+3. Search and add these essential servers:
+   - **Filesystem Official** - File access (grant `/path/to/my-project`)
+   - **GitHub Official** - Repository management (OAuth)
+   - **Docker Hub Official** - Container management (optional)
+   - **Brave Search Official** - Web research (API key required)
+
+4. For each server, click the **+** icon and complete the configuration wizard
+
+### 5. Connect Claude Code
+
+1. In MCP Toolkit, go to **Clients** tab
+2. Find **"Claude Code (CLI)"**
+3. Click **Connect**
+4. Choose **project-scoped** configuration
+
+### 6. Verify Setup
+
+```bash
+cd my-project
+claude mcp list
+
+# Expected output:
+# ✓ MCP_DOCKER (connected)
+#   - filesystem
+#   - github
+#   - docker-hub
+```
+
+### 7. Start Coding!
+
+```bash
+claude-code
+```
+
+✅ **Done!** You now have enterprise-grade MCP servers with:
+- Secure file operations
+- GitHub integration
+- Docker management
+- Web search capabilities
+- All managed visually in Docker Desktop!
+
+**Full Guide**: See [docs/DOCKER_MCP_TOOLKIT.md](docs/DOCKER_MCP_TOOLKIT.md) for advanced configuration.
+
+---
+
+## 🎯 Option C: Full Setup with RAG (Advanced)
 
 Get the complete experience with RAG-powered documentation access!
 
@@ -235,18 +324,25 @@ Claude will:
 
 ## What's the Difference?
 
-| Feature | Basic Setup | Full Setup with RAG |
-|---------|-------------|---------------------|
-| **Hooks & Commands** | ✅ | ✅ |
-| **Code Quality** | ✅ | ✅ |
-| **Security Checks** | ✅ | ✅ |
-| **Doc Search** | ❌ Manual | ✅ Automatic |
-| **Context Injection** | ❌ | ✅ |
-| **Code Examples** | ❌ | ✅ From your docs |
-| **Framework Guidance** | Generic | Project-specific |
-| **Setup Time** | 5 min | 15 min |
+| Feature | Basic Setup | Docker MCP Toolkit | Full Setup with RAG |
+|---------|-------------|-------------------|---------------------|
+| **Hooks & Commands** | ✅ | ✅ | ✅ |
+| **Code Quality** | ✅ | ✅ | ✅ |
+| **Security Checks** | ✅ | ✅ | ✅ |
+| **MCP Servers** | ❌ Manual | ✅ Visual UI | ✅ + RAG |
+| **File Operations** | Basic | ✅ MCP-powered | ✅ MCP-powered |
+| **GitHub Integration** | Manual | ✅ One-click | ✅ One-click |
+| **Doc Search** | ❌ Manual | ❌ | ✅ Automatic |
+| **Context Injection** | ❌ | ❌ | ✅ |
+| **Code Examples** | ❌ | ❌ | ✅ From your docs |
+| **Credential Security** | N/A | ✅ Docker secrets | ✅ Docker secrets |
+| **Visual Management** | ❌ | ✅ Docker Desktop | ✅ Docker Desktop |
+| **Setup Time** | 5 min | 10 min | 15 min |
 
-💡 **Recommendation**: Start with Basic Setup to get familiar, then add RAG when you're ready for the full experience!
+💡 **Recommendations**:
+- **Just starting?** → Basic Setup
+- **Want professional MCP management?** → Docker MCP Toolkit ⭐
+- **Need documentation search?** → Full Setup with RAG
 
 ## What You Get
 
@@ -277,6 +373,10 @@ Quick commands you can type to automate common tasks:
 - `/docs:readme` - Update README
 - `/docs:changelog` - Generate changelog
 - `/docs:generate` - Create API docs
+
+**MCP Management** (with Docker MCP Toolkit):
+- `/mcp:setup-docker` - Guided Docker MCP Toolkit setup
+- `/mcp:status` - Check status of all MCP servers
 
 **Knowledge Base** (with RAG setup):
 - `/knowledge:search` - Search your documentation
