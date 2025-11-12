@@ -1,0 +1,11 @@
+# Claude Code Setup Wizard Dependencies
+#
+# Basic wizard requires only Python 3.10+ standard library
+# Intelligent wizard requires Claude Agent SDK
+
+# Optional: For intelligent wizard with Claude Agent SDK
+# claude-agent-sdk>=0.1.0
+
+# Optional: For enhanced CLI experience
+# questionary>=2.0.0
+# rich>=13.0.0
