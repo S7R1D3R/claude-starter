@@ -10,12 +10,24 @@ A ready-to-use template that supercharges your development with AI automation, c
 ## What is This?
 
 This is a **starter template** that adds powerful AI capabilities to your coding projects. Think of it as a smart assistant that:
+- 🧙 **NEW: Skills System** - Modular AI expertise that auto-activates (Released Oct 2025!)
 - 🔍 **Automatically searches your documentation** using RAG (Retrieval-Augmented Generation)
 - ✅ Automatically checks your code quality
 - 🛡️ Prevents security mistakes
 - ✨ Formats and organizes your code
 - 📝 Helps you write better commits and pull requests
 - 🌐 Works with **any programming language** (JavaScript, Python, Rust, Go, Java, etc.)
+
+### ⭐ NEW: Skills System (Oct 2025)
+
+**Modular AI expertise** that extends Claude Code with specialized capabilities:
+- **Auto-Invoked**: Just ask naturally - skills activate automatically
+- **setup-wizard**: Intelligent project configuration (included!)
+- **Domain Expertise**: Add skills for security, testing, DevOps, and more
+- **Team Sharing**: Create custom skills with your team's knowledge
+- **Marketplace Ready**: Install community skills or create your own
+
+**Example:** Say *"Set up this project"* and the setup-wizard skill auto-activates!
 
 ### ⭐ NEW: Docker MCP Toolkit Integration
 
@@ -432,6 +444,9 @@ Claude will:
 
 Quick commands you can type to automate common tasks:
 
+**Setup:**
+- `/setup:wizard` - Interactive intelligent project setup wizard ⭐ **NEW!**
+
 **Development:**
 - `/dev:setup` - Install project dependencies
 - `/dev:build` - Build your project
@@ -508,10 +523,12 @@ your-project/
    - Type `/git:commit` for well-formatted commits
    - Type `/dev:setup` to install dependencies
 
-3. **Skills** add expert knowledge:
-   - Code review expertise
-   - Testing best practices
-   - More coming soon!
+3. **Skills** add expert knowledge ⭐ **NEW 2025!**:
+   - **setup-wizard**: Intelligent project configuration (auto-invoked)
+   - **session-start-hook**: Session startup customization
+   - Custom skills: Add your team's expertise
+   - Marketplace skills: Install from community
+   - Skills auto-activate based on your requests - just ask naturally!
 
 ## Common Tasks
 
@@ -559,6 +576,191 @@ go test ./...   # Go
 # - Security checks
 # - Best practice recommendations
 ```
+
+## Skills System ⭐ **NEW in 2025!**
+
+**Skills** are modular AI expertise modules released in October 2025 that extend Claude Code with specialized capabilities. Think of them as plug-and-play AI assistants for specific tasks.
+
+### What Are Skills?
+
+Skills are organized folders containing:
+- **Instructions**: Expert knowledge and workflows for specific domains
+- **Scripts**: Optional automation code
+- **Resources**: Templates, examples, and reference files
+- **Metadata**: Configuration for when and how the skill activates
+
+### Key Features
+
+✨ **Auto-Invoked**: Claude automatically uses skills based on your natural language requests
+🎯 **Context-Aware**: Skills understand your project type and adapt
+🔧 **Composable**: Multiple skills work together seamlessly
+📦 **Marketplace Ready**: Install community skills or create your own
+
+### Built-In Skills
+
+This boilerplate includes:
+
+#### 🧙 **setup-wizard** (Recommended - Install First!)
+Intelligent project setup and configuration wizard.
+
+**Installation:**
+```bash
+.claude/skills/setup-wizard/install.sh
+```
+
+**Usage:**
+```
+# Just talk naturally - it auto-activates!
+"Set up this project for TypeScript"
+"Configure Claude Code with Docker MCP"
+"Initialize my development environment"
+```
+
+**What it does:**
+- Detects your programming languages and frameworks
+- Recommends optimal Claude Code configurations
+- Installs dependencies and sets up tools
+- Configures hooks, MCP servers, and GitHub Actions
+- Provides personalized recommendations
+
+#### 🚀 **session-start-hook**
+Creates and develops startup hooks for Claude Code sessions.
+
+**Usage:**
+```
+"Help me create a session start hook"
+"Set up a hook for my repository"
+```
+
+### Installing Skills
+
+**From This Boilerplate:**
+```bash
+# Install the setup wizard skill
+.claude/skills/setup-wizard/install.sh
+
+# Choose symlink (auto-updates) or copy (standalone)
+```
+
+**From Marketplace** (Coming Soon):
+```bash
+# Browse available skills
+claude skills browse
+
+# Install a skill
+claude skills install <skill-name>
+```
+
+### Creating Custom Skills
+
+**Quick Start:**
+```bash
+mkdir -p ~/.claude/skills/my-custom-skill
+cd ~/.claude/skills/my-custom-skill
+
+# Create skill metadata
+cat > skill.json <<EOF
+{
+  "name": "my-custom-skill",
+  "displayName": "My Custom Skill",
+  "description": "Brief description for auto-invocation",
+  "version": "1.0.0",
+  "triggers": ["keyword1", "keyword2"],
+  "capabilities": ["What this skill does"]
+}
+EOF
+
+# Create skill instructions
+cat > instructions.md <<EOF
+# My Custom Skill
+
+You are an expert in [domain]. Help the user with [specific task].
+
+## Your Process
+1. [Step 1]
+2. [Step 2]
+3. [Step 3]
+
+## Guidelines
+- [Guideline 1]
+- [Guideline 2]
+EOF
+```
+
+**Skill Structure:**
+```
+~/.claude/skills/
+└── your-skill-name/
+    ├── skill.json          # Metadata and triggers
+    ├── instructions.md     # Main skill prompt
+    ├── scripts/           # Optional automation
+    │   └── helper.sh
+    └── resources/         # Templates and references
+        └── template.txt
+```
+
+### How Skills Work
+
+1. **You make a request** in natural language
+2. **Claude analyzes** your request against all installed skills
+3. **Relevant skills activate** automatically
+4. **Skills provide** specialized knowledge and workflows
+5. **You get better results** with domain expertise
+
+**Example:**
+```
+You: "Set up this TypeScript project with all best practices"
+
+Claude: [setup-wizard skill auto-activates]
+        I'll configure this TypeScript project optimally!
+
+        Detected:
+        - TypeScript 5.0
+        - React 18
+        - npm package manager
+
+        Recommended setup:
+        ✓ ESLint + Prettier
+        ✓ Jest for testing
+        ✓ All quality hooks
+        ✓ GitHub Actions
+
+        Proceeding with configuration...
+```
+
+### Skills vs Slash Commands vs Hooks
+
+| Feature | Skills | Slash Commands | Hooks |
+|---------|--------|----------------|-------|
+| **Invocation** | Auto (natural language) | Manual (type /command) | Automatic (on events) |
+| **Scope** | Broad, adaptive | Specific, fixed | Event-triggered |
+| **Complexity** | High (multi-step workflows) | Medium (single actions) | Low (automation) |
+| **Customization** | Full AI reasoning | Template-based | Scripted |
+| **Use Case** | Expert guidance | Quick utilities | Background automation |
+
+### Best Practices
+
+✅ **Do:**
+- Install skills for domains you work in frequently
+- Create team skills for shared workflows
+- Use descriptive triggers in skill.json
+- Version control your custom skills
+- Share useful skills with the community
+
+❌ **Don't:**
+- Install too many overlapping skills
+- Create skills for simple one-off tasks (use slash commands instead)
+- Hardcode credentials in skills
+- Skip testing your custom skills
+
+### Learn More
+
+- **Skills Guide**: [docs/SKILLS.md](docs/SKILLS.md)
+- **Setup Wizard Guide**: [docs/SETUP_WIZARD.md](docs/SETUP_WIZARD.md)
+- **Skill Marketplace**: Coming Soon
+- **Community Skills**: Check `anthropics/skills` on GitHub
+
+---
 
 ## Customization
 
