@@ -1,0 +1,28 @@
+{
+  "name": "setup-wizard",
+  "displayName": "Claude Code Setup Wizard",
+  "description": "Intelligent project setup and configuration wizard for Claude Code. Automatically detects project type and configures hooks, MCP servers, GitHub Actions, and development tools optimally.",
+  "version": "1.0.0",
+  "author": "Claude Code Starter Boilerplate",
+  "tags": ["setup", "configuration", "automation", "onboarding"],
+  "triggers": [
+    "setup",
+    "configure",
+    "initialize",
+    "install",
+    "onboard",
+    "getting started"
+  ],
+  "capabilities": [
+    "Project detection and analysis",
+    "Hook configuration",
+    "MCP server setup",
+    "GitHub Actions integration",
+    "RAG knowledge base setup",
+    "Dependency installation",
+    "Quality tooling configuration"
+  ],
+  "requirements": {
+    "claudeCode": ">=2.0.0"
+  }
+}
