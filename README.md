@@ -53,9 +53,9 @@ Get everything including RAG-powered documentation access.
 
 ---
 
-## 🤖 Option A: Automated Setup Wizard
+## 🤖 Option A: Automated Setup Wizard ⭐ **4 WAYS TO SET UP**
 
-The fastest way to get started! The wizard automatically detects your project and configures everything.
+Choose the method that fits your workflow best!
 
 ### 1. Get the Template
 
@@ -64,29 +64,49 @@ git clone https://github.com/yourusername/claude-starter.git my-project
 cd my-project
 ```
 
-### 2. Run the Wizard
+### 2. Choose Your Setup Method
 
-**Basic Wizard (Recommended):**
+#### 💬 Interactive Slash Command (Recommended for First-Time Users)
+**Best for:** Learning, first-time setup, understanding features
+**No API key required** - Uses your Claude Code session!
+
 ```bash
-python scripts/setup-agent.py
+# Start Claude Code
+claude-code
+
+# Then run:
+/setup:wizard
 ```
 
-**AI-Powered Wizard (Advanced):**
+Claude will interactively guide you through configuration with explanations. Ask questions as you go!
+
+#### 🤖 Auto-Invoked Skill (Recommended for Daily Use)
+**Best for:** Natural language setup, seamless integration
+
 ```bash
-# Install Claude Agent SDK
-pip install claude-agent-sdk
+# Install the skill
+.claude/skills/setup-wizard/install.sh
 
-# Set your API key
-export ANTHROPIC_API_KEY="sk-ant-your-key-here"
-
-# Run AI wizard
-python scripts/setup-agent.py --ai
+# Then just talk to Claude naturally:
+"Set up this project for TypeScript"
+"Configure Claude Code with Docker MCP"
 ```
 
-**Shell Wizard (Fastest):**
+#### 🧠 Python Agent (Complex Projects)
+**Best for:** Autonomous setup, dependency installation, complex projects
+
+```bash
+python3 scripts/wizard/setup_agent.py
+```
+
+#### ⚡ Shell Script (CI/CD & Quick Setup)
+**Best for:** Offline setup, CI/CD pipelines, fast automated setup
+
 ```bash
 ./scripts/setup-wizard.sh
 ```
+
+**Not sure which to use?** See [docs/SETUP_WIZARD.md](docs/SETUP_WIZARD.md) for detailed comparison.
 
 ### 3. What the Wizard Does
 

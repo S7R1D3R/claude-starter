@@ -145,6 +145,9 @@ project-root/
 
 ## Available Slash Commands
 
+### Setup (/setup:)
+- `/setup:wizard` - Interactive intelligent project setup wizard (Recommended for first-time setup)
+
 ### Development (/dev:)
 - `/dev:init` - Initialize new project with auto-detection
 - `/dev:setup` - Install dependencies based on detected stack
@@ -241,8 +244,11 @@ EOF
 ### Available Skills (Project-Specific)
 
 Check your `~/.claude/skills/` directory to see installed Skills:
+- **setup-wizard**: Intelligent project setup and configuration wizard (Install with `.claude/skills/setup-wizard/install.sh`)
 - **session-start-hook**: Create and develop startup hooks for Claude Code sessions
 - _More Skills will appear here as you install them_
+
+**Recommended:** Install the setup-wizard skill for seamless project configuration using natural language!
 
 ### Creating Custom Skills
 
@@ -405,6 +411,26 @@ Import additional configuration and documentation:
 _This section will be auto-populated based on your specific project. Add custom instructions, patterns, or conventions here using the `#` key in Claude Code._
 
 ## Quick Start
+
+### First-Time Setup
+
+If this is your first time using this project, set up your environment:
+
+**Interactive Setup (Recommended):**
+```
+/setup:wizard
+```
+This will guide you through configuration with explanations and help you understand all features.
+
+**Quick Automated Setup:**
+Run `./scripts/setup-wizard.sh` from terminal for fast, offline setup.
+
+**Natural Language Setup (After Installing Skill):**
+Just say "Set up this project" and the setup wizard skill will automatically activate.
+
+See [docs/SETUP_WIZARD.md](docs/SETUP_WIZARD.md) for all setup options.
+
+### After Setup
 
 1. Run `/dev:setup` to install dependencies
 2. Run `/quality:test` to verify setup

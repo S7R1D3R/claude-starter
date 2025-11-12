@@ -35,12 +35,58 @@ Complete installation and configuration guide for Claude Code Starter Boilerplat
 
 ## Quick Start
 
+### Choose Your Setup Method
+
+This boilerplate offers **four ways** to set up your environment. Pick the one that suits you best:
+
+#### 🚀 Option 1: Shell Wizard (Fastest - CI/CD Friendly)
+```bash
+# Fast, offline, automated setup
+./scripts/setup-wizard.sh
+```
+
+#### 🧠 Option 2: Python Agent (Intelligent - Complex Projects)
+```bash
+# Smart detection and configuration
+python3 scripts/wizard/setup_agent.py
+```
+
+#### 💬 Option 3: Slash Command (Interactive - Recommended for First-Time)
+```bash
+# Start Claude Code first
+claude-code
+
+# Then in Claude Code:
+/setup:wizard
+```
+
+#### 🤖 Option 4: Skill (Natural Language - Daily Use)
+```bash
+# Install the skill
+.claude/skills/setup-wizard/install.sh
+
+# Then just talk to Claude:
+"Set up this project"
+```
+
+**Not sure which to use?** See [SETUP_WIZARD.md](SETUP_WIZARD.md) for detailed comparison.
+
+**Recommended for most users:** Use `/setup:wizard` (Option 3) - it's interactive, educational, and requires no API key setup.
+
+---
+
+### Standard Quick Start
+
 ```bash
 # 1. Clone or initialize your project with this boilerplate
 git clone <your-repo-url>
 cd your-project
 
-# 2. Run the setup wizard (auto-detects your stack)
+# 2. Run the interactive setup wizard (recommended)
+# In Claude Code:
+/setup:wizard
+
+# OR use the shell wizard for quick automated setup:
 ./scripts/setup-wizard.sh
 
 # 3. Install your project dependencies
@@ -53,8 +99,8 @@ go mod download     # Go
 # 4. Verify Claude Code configuration
 ls -la .claude/
 
-# 5. Start Claude Code session
-claude-code
+# 5. Start coding!
+# Claude Code is already running if you used /setup:wizard
 ```
 
 ---
