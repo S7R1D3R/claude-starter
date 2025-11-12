@@ -1,0 +1,9 @@
+# Python Dependencies for Claude Code Starter Hooks
+# Install with: pip install -r requirements.txt
+
+# Required for RAG integration (optional - only if using RAG features)
+requests>=2.31.0
+
+# All other dependencies are Python stdlib (no installation needed):
+# - json, sys, subprocess, pathlib, datetime, re
+# These are included with Python 3.8+
